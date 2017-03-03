@@ -11,7 +11,7 @@ var Result = React.createClass({
                     {/*<ResultArticle />*/}
                     {this.props.results.map(function (response, i) {
                         return (
-                            <div className="panel panel-default" key={i}>
+                            <div className="panel panel-info" key={i}>
                                 <div className="panel-heading">
                                     <h3 className="panel-title">
                                         {response.headline.main}

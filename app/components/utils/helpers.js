@@ -37,9 +37,6 @@ var helper = {
         return axios.post("/api/saved", { articleToSave: article });
     }
 
-    //add note
-
-    //delete note
 };
 
 // We export the API helper

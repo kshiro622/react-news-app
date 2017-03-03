@@ -8,7 +8,6 @@ var SavedArticle = React.createClass({
                     <h3 className="panel-title">
                         Saved Article
                         <button className="btn btn-danger pull-right" type="submit">Remove</button>
-                        <button className="btn btn-default pull-right" type="submit">Add Note</button>
                         <div className="clearfix"></div>
                     </h3>
                 </div>
