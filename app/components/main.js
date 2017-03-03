@@ -11,7 +11,8 @@ var Main = React.createClass({
             searchTerm: "",
             startYear: "",
             endYear: "",
-            results: []
+            results: [],
+            saved: []
         };
     },
 
@@ -19,10 +20,9 @@ var Main = React.createClass({
     componentDidMount: function () {
         // Get the latest history.
         helpers.getSaved().then(function (response) {
-            console.log(response);
-            if (response !== this.state.saved) {
-                console.log("Saved", response);
-                this.setState({ saved: response });
+            var savedArticles = response.data;
+            if (savedArticles !== this.state.saved) {
+                this.setState({ saved: savedArticles });
             }
         }.bind(this));
     },
@@ -30,14 +30,18 @@ var Main = React.createClass({
     // If the component changes (i.e. if a search is entered)...
     componentDidUpdate: function () {
 
-        // Run the query for the address
+        // hit NYT API
         helpers.runQuery(this.state.searchTerm, this.state.startYear, this.state.endYear).then(function (data) {
+            var allResults = data.data.response.docs;
+            var firstFive = [];
+            for (var i = 0; i < 5; i++) {
+                firstFive.push(allResults[i]);
+            }
+            console.log(firstFive);
             if (data !== this.state.results) {
-                console.log("Results", data.data.response.docs);
-                this.setState({ results: data.data.response.docs });
+                this.setState({ results: firstFive });
             }
         }.bind(this));
-
 
     },
     // This function allows childrens to update the parent.
@@ -47,6 +51,22 @@ var Main = React.createClass({
 
     saveArticle: function (indexFromResults) {
         helpers.postSaved(this.state.results[indexFromResults]).then(function () { }.bind(this));
+        helpers.getSaved().then(function (response) {
+            var savedArticles = response.data;
+            if (savedArticles !== this.state.saved) {
+                this.setState({ saved: savedArticles });
+            }
+        }.bind(this));
+    },
+
+    deleteArticle: function (idFromSaved) {
+        helpers.deleteArticle(idFromSaved).then(function () { }.bind(this));
+        helpers.getSaved().then(function (response) {
+            var savedArticles = response.data;
+            if (savedArticles !== this.state.saved) {
+                this.setState({ saved: savedArticles });
+            }
+        }.bind(this));
     },
 
     render: function () {
@@ -86,7 +106,7 @@ var Main = React.createClass({
                     </div>
                     <Query setParentStates={this.setParentStates} />
                     <Results saveArticle={this.saveArticle} results={this.state.results} />
-                    <Saved saved={this.state.saved} />
+                    <Saved deleteArticle={this.deleteArticle} saved={this.state.saved} />
                 </div>
 
             </div>

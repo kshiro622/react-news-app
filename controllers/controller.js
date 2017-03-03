@@ -14,6 +14,7 @@ module.exports = function (app) {
         var articleTitle = req.body.articleToSave.headline.main;
         var articleLink = req.body.articleToSave.web_url;
         var articleDate = req.body.articleToSave.pub_date;
+        var articleSnippet = req.body.articleToSave.snippet;
 
         Article.find({ "title": articleTitle },
             function (err, docs) {
@@ -21,7 +22,8 @@ module.exports = function (app) {
                     var newArticle = new Article({
                         title: articleTitle,
                         link: articleLink,
-                        date: articleDate
+                        date: articleDate,
+                        snippet: articleSnippet
                     });
                     newArticle.save(function (err, newArticles) {
                         if (err) return console.error(err);
@@ -30,5 +32,13 @@ module.exports = function (app) {
                 }
             }
         );
+    });
+
+    app.delete("/api/saved/:id", function (req, res) {
+        Article.findByIdAndRemove(req.params.id, function (err, response) {
+            if (err) {
+                console.log(err);
+            }
+        });
     });
 };

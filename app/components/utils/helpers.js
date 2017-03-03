@@ -33,6 +33,10 @@ var helper = {
     // This function posts new searches to our database.
     postSaved: function (article) {
         return axios.post("/api/saved", { articleToSave: article });
+    },
+
+    deleteArticle: function (id) {
+        return axios.delete("/api/saved/" + id);
     }
 
 };
