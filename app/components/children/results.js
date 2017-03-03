@@ -1,21 +1,10 @@
 var React = require("react");
 
 var Result = React.createClass({
-    getInitialState: function () {
-        return {
-            saved: ""
-        };
-    },
-    handleClick: function (event) {
+
+    handleClick: function (index) {
         event.preventDefault();
-        this.setState({
-            saved: {
-                title: event.target.dataset["title"],
-                link: event.target.dataset["link"],
-                date: event.target.dataset["date"]
-            }
-        });
-        this.props.setSavedState(this.state.saved);
+        this.props.saveArticle(index);
     },
 
     render: function () {
@@ -32,7 +21,7 @@ var Result = React.createClass({
                                 <div className="panel-heading">
                                     <h3 className="panel-title">
                                         {response.headline.main}
-                                        <button onClick={this.handleClick} className="btn btn-success pull-right" data-title={response.headline.main} data-date={response.pub_date} data-link={response.web_url}>Save</button>
+                                        <button onClick={() => this.handleClick(i)} className="btn btn-success pull-right">Save</button>
                                         <div className="clearfix"></div>
                                     </h3>
                                 </div>
