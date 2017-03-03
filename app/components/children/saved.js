@@ -1,19 +1,19 @@
 var React = require("react");
-var ResultArticle = require("./resultArticle");
+var SavedArticle = require("./savedArticle");
 
-var Result = React.createClass({
+var Saved = React.createClass({
     render: function () {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Search</h3>
+                    <h3 className="panel-title">Saved</h3>
                 </div>
                 <div className="panel-body">
-                    <ResultArticle />
+                    <SavedArticle />
                 </div>
             </div>
         );
     }
 });
 
-module.exports = Result;
+module.exports = Saved;

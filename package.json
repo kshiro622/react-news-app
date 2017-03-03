@@ -4,7 +4,10 @@
   "description": "",
   "main": "public/index.html",
   "dependencies": {
+    "axios": "^0.15.3",
+    "body-parser": "^1.17.0",
     "express": "^4.14.1",
+    "mongoose": "^4.8.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
@@ -17,7 +20,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -w"
+    "build": "webpack -w",
+    "dev": "webpack & node server"
   },
   "repository": {
     "type": "git",

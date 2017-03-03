@@ -1,8 +1,49 @@
 var React = require("react");
-var Search = require("./search");
-var Saved = require("./saved");
+var Query = require("./children/query");
+var Results = require("./children/results");
+var Saved = require("./children/saved");
+var helpers = require("./utils/helpers");
 
 var Main = React.createClass({
+
+    getInitialState: function () {
+        return {
+            searchTerm: "",
+            startYear: "",
+            endYear: "",
+            results: [],
+            saved: []
+        };
+    },
+
+    // The moment the page renders get the History
+    componentDidMount: function () {
+        // Get the latest history.
+        helpers.getSaved().then(function (response) {
+            console.log(response);
+            if (response !== this.state.saved) {
+                console.log("Saved", response);
+                this.setState({ saved: response });
+            }
+        }.bind(this));
+    },
+
+    // If the component changes (i.e. if a search is entered)...
+    componentDidUpdate: function () {
+
+        // Run the query for the address
+        helpers.runQuery(this.state.searchTerm, this.state.startYear, this.state.endYear).then(function (data) {
+            if (data !== this.state.results) {
+                console.log("Results", data.data.response.docs);
+                this.setState({ results: data.data.response.docs });
+            }
+        }.bind(this));
+    },
+    // This function allows childrens to update the parent.
+    setParentStates: function (term, startYear, endYear) {
+        this.setState({ searchTerm: term, startYear: startYear, endYear: endYear });
+    },
+
     render: function () {
         return (
             <div>
@@ -38,8 +79,9 @@ var Main = React.createClass({
                         <hr />
                         <p>Save and annotate your favorite articles</p>
                     </div>
-                    <Search />
-                    <Saved />
+                    <Query setParentStates={this.setParentStates} />
+                    <Results results={this.state.results} />
+                    <Saved saved={this.state.saved} />
                 </div>
 
             </div>
