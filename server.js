@@ -1,3 +1,4 @@
+// Dependencies
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
@@ -14,12 +15,13 @@ db.once('open', function () {
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-//
+// Use body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+// Serve static files from public
 app.use(express.static("./public"));
 
 // Routes

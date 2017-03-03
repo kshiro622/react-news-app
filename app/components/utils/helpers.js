@@ -1,13 +1,13 @@
 // Include the axios package for performing HTTP requests (promise based alternative to request)
 var axios = require("axios");
 
-// NYT API
+// NYT API key
 var apiKey = '46ba128fd7fe4d9bb083047938f7d947';
 
 // Helper functions for making API Calls
 var helper = {
 
-    // This function serves our purpose of running the query to geolocate.
+    // Runs query to NYT API
     runQuery: function (searchTerm, startYear, endYear) {
 
         var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
@@ -16,7 +16,7 @@ var helper = {
         console.log(queryURL);
 
         return axios.get(queryURL).then(function (response) {
-            // If get get a result, return that result's formatted address property
+            // If get get a result, return the result
             if (response) {
                 return response;
             }
@@ -25,16 +25,17 @@ var helper = {
         });
     },
 
-    // This function hits our own server to retrieve the record of query results
+    // Saves article to db
     getSaved: function () {
         return axios.get("/api/saved");
     },
 
-    // This function posts new searches to our database.
+    // Posts saved articles to db
     postSaved: function (article) {
         return axios.post("/api/saved", { articleToSave: article });
     },
 
+    // Deletes articles from db
     deleteArticle: function (id) {
         return axios.delete("/api/saved/" + id);
     }

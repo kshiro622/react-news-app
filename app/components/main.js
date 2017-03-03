@@ -1,11 +1,14 @@
+// Dependencies
 var React = require("react");
 var Query = require("./children/query");
 var Results = require("./children/results");
 var Saved = require("./children/saved");
 var helpers = require("./utils/helpers");
 
+// Main component
 var Main = React.createClass({
 
+    // Function to get initial state
     getInitialState: function () {
         return {
             searchTerm: "",
@@ -16,9 +19,8 @@ var Main = React.createClass({
         };
     },
 
-    // The moment the page renders get the History
+    // The moment the page renders get saved articles from db
     componentDidMount: function () {
-        // Get the latest history.
         helpers.getSaved().then(function (response) {
             var savedArticles = response.data;
             if (savedArticles !== this.state.saved) {
@@ -30,25 +32,29 @@ var Main = React.createClass({
     // If the component changes (i.e. if a search is entered)...
     componentDidUpdate: function () {
 
-        // hit NYT API
         helpers.runQuery(this.state.searchTerm, this.state.startYear, this.state.endYear).then(function (data) {
+
             var allResults = data.data.response.docs;
             var firstFive = [];
+
+            // For loop to store only first 5 results
             for (var i = 0; i < 5; i++) {
                 firstFive.push(allResults[i]);
             }
-            console.log(firstFive);
+
+            // Set state
             if (data !== this.state.results) {
                 this.setState({ results: firstFive });
             }
         }.bind(this));
 
     },
-    // This function allows childrens to update the parent.
+    // Allows childrens to update the parent
     setParentStates: function (term, startYear, endYear) {
         this.setState({ searchTerm: term, startYear: startYear, endYear: endYear });
     },
 
+    // Allows children to save article to db
     saveArticle: function (indexFromResults) {
         helpers.postSaved(this.state.results[indexFromResults]).then(function () { }.bind(this));
         helpers.getSaved().then(function (response) {
@@ -59,6 +65,7 @@ var Main = React.createClass({
         }.bind(this));
     },
 
+    // Allows children to delete article from db
     deleteArticle: function (idFromSaved) {
         helpers.deleteArticle(idFromSaved).then(function () { }.bind(this));
         helpers.getSaved().then(function (response) {
@@ -69,6 +76,7 @@ var Main = React.createClass({
         }.bind(this));
     },
 
+    // Render function
     render: function () {
         return (
             <div>
@@ -104,9 +112,12 @@ var Main = React.createClass({
                         <hr />
                         <p>Save your favorite articles</p>
                     </div>
+
+                    {/*Components*/}
                     <Query setParentStates={this.setParentStates} />
                     <Results saveArticle={this.saveArticle} results={this.state.results} />
                     <Saved deleteArticle={this.deleteArticle} saved={this.state.saved} />
+
                 </div>
 
             </div>
@@ -114,4 +125,5 @@ var Main = React.createClass({
     }
 });
 
+// Export component
 module.exports = Main;
