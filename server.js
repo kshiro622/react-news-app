@@ -24,7 +24,6 @@ app.use(express.static("./public"));
 
 // Routes
 require("./controllers/controller.js")(app);
-require("./controllers/html_routes.js")(app);
 
 // Listing on PORT
 app.listen(PORT, function () {

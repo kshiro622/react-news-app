@@ -83,7 +83,7 @@ var Main = React.createClass({
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand" href="/">NYT Annotator</a>
+                            <a className="navbar-brand" href="/">NYT Article Keeper</a>
                         </div>
                         {/*<!-- Collect content for toggling -->*/}
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -99,10 +99,10 @@ var Main = React.createClass({
                 {/*Main*/}
                 <div className="container">
                     <div className="jumbotron">
-                        <h1>Article Annotator</h1>
+                        <h1>Article Keeper</h1>
                         <h2>New York Times Edition</h2>
                         <hr />
-                        <p>Save and annotate your favorite articles</p>
+                        <p>Save your favorite articles</p>
                     </div>
                     <Query setParentStates={this.setParentStates} />
                     <Results saveArticle={this.saveArticle} results={this.state.results} />
