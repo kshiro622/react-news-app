@@ -12,7 +12,7 @@ var Main = React.createClass({
             startYear: "",
             endYear: "",
             results: [],
-            saved: []
+            saved: ""
         };
     },
 
@@ -38,10 +38,18 @@ var Main = React.createClass({
                 this.setState({ results: data.data.response.docs });
             }
         }.bind(this));
+
+        helpers.postSaved(this.state.saved).then(function () {
+            console.log("helpers.postSaved");
+        }.bind(this));
     },
     // This function allows childrens to update the parent.
     setParentStates: function (term, startYear, endYear) {
         this.setState({ searchTerm: term, startYear: startYear, endYear: endYear });
+    },
+
+    setSavedState: function (stateFromResults) {
+        this.setState({ saved: stateFromResults })
     },
 
     render: function () {
@@ -80,7 +88,7 @@ var Main = React.createClass({
                         <p>Save and annotate your favorite articles</p>
                     </div>
                     <Query setParentStates={this.setParentStates} />
-                    <Results results={this.state.results} />
+                    <Results setSavedState={this.setSavedState} results={this.state.results} />
                     <Saved saved={this.state.saved} />
                 </div>
 

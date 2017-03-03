@@ -1,6 +1,23 @@
 var React = require("react");
 
 var Result = React.createClass({
+    getInitialState: function () {
+        return {
+            saved: ""
+        };
+    },
+    handleClick: function (event) {
+        event.preventDefault();
+        this.setState({
+            saved: {
+                title: event.target.dataset["title"],
+                link: event.target.dataset["link"],
+                date: event.target.dataset["date"]
+            }
+        });
+        this.props.setSavedState(this.state.saved);
+    },
+
     render: function () {
         return (
             <div className="panel panel-default">
@@ -15,7 +32,7 @@ var Result = React.createClass({
                                 <div className="panel-heading">
                                     <h3 className="panel-title">
                                         {response.headline.main}
-                                        <button className="btn btn-success pull-right" type="submit">Save</button>
+                                        <button onClick={this.handleClick} className="btn btn-success pull-right" data-title={response.headline.main} data-date={response.pub_date} data-link={response.web_url}>Save</button>
                                         <div className="clearfix"></div>
                                     </h3>
                                 </div>
@@ -26,7 +43,7 @@ var Result = React.createClass({
                                 </div>
                             </div>
                         );
-                    })}
+                    }.bind(this))}
                 </div>
             </div>
         );

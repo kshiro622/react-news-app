@@ -61,7 +61,7 @@ var Query = React.createClass({
                             <label htmlFor="end-year">End Year</label>
                             <input type="text" className="form-control" value={this.state.endYear} id="end-year" onChange={this.handleChangeEndYear} placeholder="e.g. 2014" />
                         </div>
-                        <button type="submit" className="btn btn-lg btn-info" id="search-btn">Search</button>
+                        <button type="submit" className="btn btn-lg btn-primary" id="search-btn">Search</button>
                     </form>
                 </div>
             </div>

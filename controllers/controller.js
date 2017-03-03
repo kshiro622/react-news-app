@@ -9,7 +9,15 @@ module.exports = function (app) {
         });
     });
 
-    // app.post("/api/saved", function (req, res) {
-    //     new Article = new Article
-    // });
+    app.post("/api/saved", function (req, res) {
+        console.log(req.body);
+        // var newArticle = new Article({
+        //     title: req.body.title,
+        //     link: req.body.link,
+        //     date: req.body.date
+        // });
+        // newArticle.save(function (err, newArticles) {
+        //     if (err) return console.error(err);
+        // })
+    });
 }
