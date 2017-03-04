@@ -107,7 +107,7 @@ var Main = React.createClass({
                 {/*Main*/}
                 <div className="container">
                     <div className="jumbotron">
-                        <h1>Article Keeper</h1>
+                        <h1>Article Saver</h1>
                         <h2>New York Times Edition</h2>
                         <hr />
                         <p>Save your favorite articles</p>

@@ -13,6 +13,7 @@ var Saved = React.createClass({
     // Render function
     render: function () {
         return (
+
             // Saved articles panel
             <div className="panel panel-default">
                 <div className="panel-heading">
