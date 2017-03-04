@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 
 // Set up db
-mongoose.connect('mongodb://localhost/nytreact');
+mongoose.connect('mongodb://heroku_whprclxk:une33v8gej92d2taojj0i4ehul@ds117830.mlab.com:17830/heroku_whprclxk');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
