@@ -1,6 +1,6 @@
 // Dependencies
 var React = require("react");
-var Query = require("./children/query");
+var Search = require("./children/search");
 var Results = require("./children/results");
 var Saved = require("./children/saved");
 var helpers = require("./utils/helpers");
@@ -97,8 +97,7 @@ var Main = React.createClass({
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav">
                                 <li className="active"><a href="/">Home <span className="sr-only">(current)</span></a></li>
-                                <li><a href="/saved">Saved Articles</a></li>
-                                <li><a href="/saved/notes">Article Notes</a></li>
+                                <li><a href="#saved">Saved Articles</a></li>
                             </ul>
                         </div>
                     </div>
@@ -114,7 +113,7 @@ var Main = React.createClass({
                     </div>
 
                     {/*Components*/}
-                    <Query setParentStates={this.setParentStates} />
+                    <Search setParentStates={this.setParentStates} />
                     <Results saveArticle={this.saveArticle} results={this.state.results} />
                     <Saved deleteArticle={this.deleteArticle} saved={this.state.saved} />
 

@@ -15,7 +15,7 @@ var Saved = React.createClass({
         return (
 
             // Saved articles panel
-            <div className="panel panel-default">
+            <div className="panel panel-default" id="saved">
                 <div className="panel-heading">
                     <h3 className="panel-title">Saved Articles</h3>
                 </div>
@@ -35,7 +35,7 @@ var Saved = React.createClass({
                                 <div className="panel-body">
                                     <p><em>Date Published:</em> {response.date}</p>
                                     <p><em>Snippet:</em> {response.snippet}</p>
-                                    <p><a href={response.link} target="blank">Link to Article</a></p>
+                                    <p><a href={response.url} target="blank">Link to Article</a></p>
                                 </div>
                             </div>
                         );

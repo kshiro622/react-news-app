@@ -1,6 +1,6 @@
 var React = require("react");
 
-var Query = React.createClass({
+var Search = React.createClass({
 
     // Here we set a generic state associated with the text being searched for
     getInitialState: function () {
@@ -69,5 +69,5 @@ var Query = React.createClass({
     }
 });
 
-module.exports = Query;
+module.exports = Search;
 

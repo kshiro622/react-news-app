@@ -24,7 +24,7 @@ module.exports = function (app) {
         var articleDate = req.body.articleToSave.pub_date;
 
         // Make articleDate more readable
-        articleDate = articleDate.slice(5, 8) + articleDate.slice(8, 10) + "-" + articleDate.slice(0, 4);
+        articleDate = articleDate.slice(5, 8) + articleDate.slice(8, 10) + "-" + articleDate.slice(0, 4) + " " + articleDate.slice(11, 19);
 
         // Save new article to db, only if it doesn't already exist
         Article.find({ "link": articleLink },

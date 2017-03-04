@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 // Rules
 var articleSchema = new Schema({
     title: String,
-    link: String,
     date: String,
+    url: String,
     snippet: String,
     time: { type: Date, default: Date.now }
 });
