@@ -24,7 +24,6 @@ var Result = React.createClass({
                     {this.props.results.map(function (response, i) {
                         var pubDate = response.pub_date;
                         pubDate = pubDate.slice(5, 8) + pubDate.slice(8, 10) + "-" + pubDate.slice(0, 4) + " " + pubDate.slice(11, 19);
-                        console.log(pubDate);
                         return (
                             <div className="panel panel-default" key={i}>
                                 <div className="panel-heading">

@@ -27,7 +27,7 @@ module.exports = function (app) {
         articleDate = articleDate.slice(5, 8) + articleDate.slice(8, 10) + "-" + articleDate.slice(0, 4) + " " + articleDate.slice(11, 19);
 
         // Save new article to db, only if it doesn't already exist
-        Article.find({ "link": articleLink },
+        Article.find({ "url": articleLink },
             function (err, docs) {
                 if (docs.length === 0) {
                     var newArticle = new Article({
@@ -47,6 +47,7 @@ module.exports = function (app) {
 
     // Route to remove article from db
     app.delete("/api/saved/:id", function (req, res) {
+        console.log(req.params.id);
         Article.findByIdAndRemove(req.params.id, function (err, response) {
             if (err) {
                 console.log(err);
